@@ -8,6 +8,31 @@
   },
   "categories": [
     {
+      "id": "monitors",
+      "name": "Мониторы",
+      "icon": "🖥️",
+      "items": [
+        {
+          "id": "monitor-1",
+          "name": "Монитор 27\" Full HD",
+          "description": "27 дюймов, 1920×1080, IPS-матрица, 75 Гц. Разъёмы: HDMI, DisplayPort, VGA.",
+          "price_per_day": 400,
+          "currency": "₽",
+          "image": "",
+          "available": true
+        },
+        {
+          "id": "monitor-2",
+          "name": "Монитор 24\" Full HD",
+          "description": "24 дюйма, 1920×1080, IPS-матрица, 60 Гц. Разъёмы: HDMI, VGA. Компактный и лёгкий.",
+          "price_per_day": 300,
+          "currency": "₽",
+          "image": "",
+          "available": true
+        }
+      ]
+    },
+    {
       "id": "tables",
       "name": "Столы",
       "icon": "🪑",
@@ -58,56 +83,6 @@
       ]
     },
     {
-      "id": "monitors",
-      "name": "Мониторы",
-      "icon": "🖥️",
-      "items": [
-        {
-          "id": "monitor-1",
-          "name": "Монитор 27\" Full HD",
-          "description": "27 дюймов, 1920×1080, IPS-матрица, 75 Гц. Разъёмы: HDMI, DisplayPort, VGA.",
-          "price_per_day": 400,
-          "currency": "₽",
-          "image": "",
-          "available": true
-        },
-        {
-          "id": "monitor-2",
-          "name": "Монитор 24\" Full HD",
-          "description": "24 дюйма, 1920×1080, IPS-матрица, 60 Гц. Разъёмы: HDMI, VGA. Компактный и лёгкий.",
-          "price_per_day": 300,
-          "currency": "₽",
-          "image": "",
-          "available": true
-        }
-      ]
-    },
-    {
-      "id": "audio",
-      "name": "Колонки",
-      "icon": "🔊",
-      "items": [
-        {
-          "id": "speaker-1",
-          "name": "Колонка Bluetooth портативная",
-          "description": "Мощность 40 Вт, встроенный аккумулятор 10 ч, Bluetooth 5.0, AUX-вход. Подходит для небольших мероприятий.",
-          "price_per_day": 500,
-          "currency": "₽",
-          "image": "",
-          "available": true
-        },
-        {
-          "id": "speaker-2",
-          "name": "Акустическая система 2.1",
-          "description": "Сателлиты 2×15 Вт + сабвуфер 30 Вт. Подключение: USB, AUX. Для офисных мероприятий.",
-          "price_per_day": 350,
-          "currency": "₽",
-          "image": "",
-          "available": false
-        }
-      ]
-    },
-    {
       "id": "lighting",
       "name": "Осветительные приборы",
       "icon": "💡",
@@ -138,6 +113,31 @@
           "currency": "₽",
           "image": "",
           "available": true
+        }
+      ]
+    },
+    {
+      "id": "audio",
+      "name": "Колонки",
+      "icon": "🔊",
+      "items": [
+        {
+          "id": "speaker-1",
+          "name": "Колонка Bluetooth портативная",
+          "description": "Мощность 40 Вт, встроенный аккумулятор 10 ч, Bluetooth 5.0, AUX-вход. Подходит для небольших мероприятий.",
+          "price_per_day": 500,
+          "currency": "₽",
+          "image": "",
+          "available": true
+        },
+        {
+          "id": "speaker-2",
+          "name": "Акустическая система 2.1",
+          "description": "Сателлиты 2×15 Вт + сабвуфер 30 Вт. Подключение: USB, AUX. Для офисных мероприятий.",
+          "price_per_day": 350,
+          "currency": "₽",
+          "image": "",
+          "available": false
         }
       ]
     }
