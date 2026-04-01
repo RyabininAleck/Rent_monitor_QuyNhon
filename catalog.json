@@ -88,25 +88,36 @@
       "icon": "💺",
       "items": [
         {
-          "id": "chair-1",
-          "name": { "ru": "Кресло геймерское", "en": "Gaming chair" },
+          "id": "chair-xpanse-xnova-djy003",
+          "name": { "ru": "Xpanse Xnova Gaming Chair", "en": "Xpanse Xnova Gaming Chair" },
           "description": {
-            "ru": "Эргономичное геймерское кресло с поясничной поддержкой, регулировкой высоты и подлокотников.",
-            "en": "Ergonomic gaming chair with lumbar support, height and armrest adjustment."
+            "ru": "Игровое офисное кресло: эргономика, усиленная подушка сиденья, линейка комплектаций Xnova (серые расцветки, варианты Pro/Max в магазине). Подробнее: https://xpansemy.com/products/djy-003",
+            "en": "Ergonomic gaming and office chair with a thickened seat cushion; Xnova editions (gray variants, Pro/Max options on the store). Details: https://xpansemy.com/products/djy-003"
           },
           "price_per_day": { "rub": 250, "vnd": 69000, "usd": 2.75 },
-          "image": "",
+          "image": "https://xpansemy.com/cdn/shop/files/2_e2d9a08d-9233-4fd7-8ac1-6f940c1afb97.png?v=1765505442",
           "available": true
         },
         {
-          "id": "chair-2",
-          "name": { "ru": "Офисное кресло", "en": "Office chair" },
+          "id": "chair-xpanse-xmist",
+          "name": { "ru": "Xpanse XMist Gaming Chair", "en": "Xpanse XMist Gaming Chair" },
           "description": {
-            "ru": "Классическое офисное кресло с сетчатой спинкой. Регулируемая высота, подъёмный механизм.",
-            "en": "Classic office chair with mesh back. Adjustable height, gas lift."
+            "ru": "Игровое кресло с адаптивной поясничной поддержкой; откид спинки до ~140°. Офис / дом / ПК. Подробнее: https://xpansemy.com/products/xpanse-xmist-gaming-chair",
+            "en": "Gaming chair with adaptive lumbar support; backrest reclines to ~140°. Office and PC use. Details: https://xpansemy.com/products/xpanse-xmist-gaming-chair"
           },
-          "price_per_day": { "rub": 150, "vnd": 41000, "usd": 1.65 },
-          "image": "",
+          "price_per_day": { "rub": 280, "vnd": 77000, "usd": 3.08 },
+          "image": "https://xpansemy.com/cdn/shop/files/19_5.jpg?v=1762486898",
+          "available": true
+        },
+        {
+          "id": "chair-xpanse-x904",
+          "name": { "ru": "Xpanse X904 Ergonomic Office Chair", "en": "Xpanse X904 Ergonomic Office Chair" },
+          "description": {
+            "ru": "Эргономичное сетчатое кресло: 3-зонная поддержка поясницы, 3D-подголовник, дышащая сетка, откид спинки до 135° с фиксацией. Рост производителя ~155–190 см. Подробнее: https://xpansemy.com/products/xpanse-x904-ergonomic-office-chair",
+            "en": "Ergonomic mesh chair: 3-zone lumbar support, 3D headrest, breathable mesh, 135° reclining back with lock. Manufacturer height range ~155–190 cm. Details: https://xpansemy.com/products/xpanse-x904-ergonomic-office-chair"
+          },
+          "price_per_day": { "rub": 300, "vnd": 82500, "usd": 3.3 },
+          "image": "https://xpansemy.com/cdn/shop/files/10_19e7bb03-ae39-4d84-8d1b-de5d120c7188.jpg?v=1762503964",
           "available": true
         }
       ]
