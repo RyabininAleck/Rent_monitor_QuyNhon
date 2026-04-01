@@ -16,8 +16,7 @@
           "id": "monitor-1",
           "name": "Монитор 27\" Full HD",
           "description": "27 дюймов, 1920×1080, IPS-матрица, 75 Гц. Разъёмы: HDMI, DisplayPort, VGA.",
-          "price_per_day": 400,
-          "currency": "₽",
+          "price_per_day": { "rub": 400, "vnd": 110000, "usd": 4.4 },
           "image": "",
           "available": true
         },
@@ -25,8 +24,7 @@
           "id": "monitor-2",
           "name": "Монитор 24\" Full HD",
           "description": "24 дюйма, 1920×1080, IPS-матрица, 60 Гц. Разъёмы: HDMI, VGA. Компактный и лёгкий.",
-          "price_per_day": 300,
-          "currency": "₽",
+          "price_per_day": { "rub": 300, "vnd": 82500, "usd": 3.3 },
           "image": "",
           "available": true
         }
@@ -41,8 +39,7 @@
           "id": "table-1",
           "name": "Стол компьютерный угловой",
           "description": "Угловой стол 160×120 см, ДСП 25 мм, металлические ножки. Подходит для рабочего места.",
-          "price_per_day": 300,
-          "currency": "₽",
+          "price_per_day": { "rub": 300, "vnd": 82500, "usd": 3.3 },
           "image": "",
           "available": true
         },
@@ -50,8 +47,7 @@
           "id": "table-2",
           "name": "Стол прямой 120 см",
           "description": "Прямой рабочий стол 120×60 см, высота 75 см. Лёгкий, удобный для переноски.",
-          "price_per_day": 200,
-          "currency": "₽",
+          "price_per_day": { "rub": 200, "vnd": 55000, "usd": 2.2 },
           "image": "",
           "available": true
         }
@@ -66,8 +62,7 @@
           "id": "chair-1",
           "name": "Кресло геймерское",
           "description": "Эргономичное геймерское кресло с поясничной поддержкой, регулировкой высоты и подлокотников.",
-          "price_per_day": 250,
-          "currency": "₽",
+          "price_per_day": { "rub": 250, "vnd": 69000, "usd": 2.75 },
           "image": "",
           "available": true
         },
@@ -75,8 +70,7 @@
           "id": "chair-2",
           "name": "Офисное кресло",
           "description": "Классическое офисное кресло с сетчатой спинкой. Регулируемая высота, подъёмный механизм.",
-          "price_per_day": 150,
-          "currency": "₽",
+          "price_per_day": { "rub": 150, "vnd": 41000, "usd": 1.65 },
           "image": "",
           "available": true
         }
@@ -91,8 +85,7 @@
           "id": "light-1",
           "name": "Кольцевая лампа 45 см",
           "description": "Кольцевая LED-лампа диаметром 45 см, 3 режима света (тёплый/нейтральный/холодный), со штативом до 2 м.",
-          "price_per_day": 400,
-          "currency": "₽",
+          "price_per_day": { "rub": 400, "vnd": 110000, "usd": 4.4 },
           "image": "",
           "available": true
         },
@@ -100,8 +93,7 @@
           "id": "light-2",
           "name": "Настольная LED-лампа",
           "description": "Настольный LED-светильник, регулировка яркости и цвета температуры. Для рабочего стола.",
-          "price_per_day": 150,
-          "currency": "₽",
+          "price_per_day": { "rub": 150, "vnd": 41000, "usd": 1.65 },
           "image": "",
           "available": true
         },
@@ -109,8 +101,7 @@
           "id": "light-3",
           "name": "Прожектор LED 50 Вт",
           "description": "Направленный прожектор 50 Вт, 4000К. Подходит для освещения сцены или мероприятий на улице.",
-          "price_per_day": 600,
-          "currency": "₽",
+          "price_per_day": { "rub": 600, "vnd": 165000, "usd": 6.6 },
           "image": "",
           "available": true
         }
@@ -125,8 +116,7 @@
           "id": "speaker-1",
           "name": "Колонка Bluetooth портативная",
           "description": "Мощность 40 Вт, встроенный аккумулятор 10 ч, Bluetooth 5.0, AUX-вход. Подходит для небольших мероприятий.",
-          "price_per_day": 500,
-          "currency": "₽",
+          "price_per_day": { "rub": 500, "vnd": 137500, "usd": 5.5 },
           "image": "",
           "available": true
         },
@@ -134,8 +124,7 @@
           "id": "speaker-2",
           "name": "Акустическая система 2.1",
           "description": "Сателлиты 2×15 Вт + сабвуфер 30 Вт. Подключение: USB, AUX. Для офисных мероприятий.",
-          "price_per_day": 350,
-          "currency": "₽",
+          "price_per_day": { "rub": 350, "vnd": 96000, "usd": 3.85 },
           "image": "",
           "available": false
         }

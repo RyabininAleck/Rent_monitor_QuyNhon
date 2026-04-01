@@ -87,11 +87,53 @@
       background: rgba(15,15,19,0.92);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
-      padding: 0 24px;
+      padding: 10px 24px;
+    }
+
+    .nav-row {
       display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 16px 28px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    #nav-cats {
+      display: flex;
+      flex-wrap: wrap;
       gap: 4px;
       justify-content: center;
-      flex-wrap: wrap;
+    }
+
+    .nav-currency {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-currency label {
+      font-size: 0.85rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .nav-currency select {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      min-width: 160px;
+    }
+
+    .nav-currency select:hover,
+    .nav-currency select:focus {
+      border-color: var(--accent);
+      outline: none;
     }
 
     nav a {
@@ -226,7 +268,7 @@
       color: var(--accent2);
     }
 
-    .card-price span {
+    .card-price .card-price-suffix {
       font-size: 0.75rem;
       font-weight: 400;
       color: var(--muted);
@@ -287,7 +329,19 @@
   <div class="contact-bar" id="contact-bar"></div>
 </header>
 
-<nav id="nav"></nav>
+<nav id="nav">
+  <div class="nav-row">
+    <div id="nav-cats"></div>
+    <div class="nav-currency">
+      <label for="currency-select">Валюта</label>
+      <select id="currency-select" aria-label="Выбор валюты для отображения цен">
+        <option value="rub">Рубли (₽)</option>
+        <option value="vnd">Донги (₫)</option>
+        <option value="usd">Доллары ($)</option>
+      </select>
+    </div>
+  </div>
+</nav>
 
 <main id="main">
   <div class="loading">Загружаем каталог...</div>
@@ -298,10 +352,68 @@
 </footer>
 
 <script>
+  const CURRENCY_STORAGE_KEY = 'rent_monitor_currency';
+  const CURRENCY_CODES = ['rub', 'vnd', 'usd'];
+
   async function loadCatalog() {
     const res = await fetch('catalog.json');
     if (!res.ok) throw new Error('Не удалось загрузить catalog.json');
     return res.json();
+  }
+
+  function getStoredCurrency() {
+    try {
+      const v = localStorage.getItem(CURRENCY_STORAGE_KEY);
+      if (v && CURRENCY_CODES.includes(v)) return v;
+    } catch (_) {}
+    return 'rub';
+  }
+
+  function setStoredCurrency(code) {
+    try {
+      localStorage.setItem(CURRENCY_STORAGE_KEY, code);
+    } catch (_) {}
+  }
+
+  function formatPrice(code, value) {
+    const n = Number(value);
+    if (code === 'rub') {
+      return new Intl.NumberFormat('ru-RU').format(n) + ' ₽';
+    }
+    if (code === 'vnd') {
+      return new Intl.NumberFormat('vi-VN').format(Math.round(n)) + ' ₫';
+    }
+    if (code === 'usd') {
+      return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 2
+      }).format(n);
+    }
+    return String(n);
+  }
+
+  function normalizeItemPrices(item) {
+    const p = item.price_per_day;
+    if (p && typeof p === 'object' && 'rub' in p && 'vnd' in p && 'usd' in p) {
+      return { rub: p.rub, vnd: p.vnd, usd: p.usd };
+    }
+    const legacy = Number(item.price_per_day);
+    return { rub: legacy, vnd: legacy, usd: legacy };
+  }
+
+  function applyCurrencyToCards() {
+    const sel = document.getElementById('currency-select');
+    const code = sel ? sel.value : 'rub';
+    document.querySelectorAll('.card-price[data-rub]').forEach(el => {
+      const raw = el.getAttribute('data-' + code);
+      const num = raw != null ? Number(raw) : NaN;
+      const amount = el.querySelector('.card-price-amount');
+      if (amount && !Number.isNaN(num)) {
+        amount.textContent = formatPrice(code, num);
+      }
+    });
   }
 
   function buildContactBar(company) {
@@ -320,14 +432,15 @@
   }
 
   function buildNav(categories) {
-    const nav = document.getElementById('nav');
-    nav.innerHTML = categories.map(cat =>
+    const navCats = document.getElementById('nav-cats');
+    navCats.innerHTML = categories.map(cat =>
       `<a href="#cat-${cat.id}">${cat.icon} ${cat.name}</a>`
     ).join('');
   }
 
   function buildCard(item, categoryIcon) {
     const avail = item.available;
+    const prices = normalizeItemPrices(item);
     const imageHtml = item.image
       ? `<div class="card-image"><img src="${item.image}" alt="${item.name}" loading="lazy" /></div>`
       : `<div class="card-image">${categoryIcon}</div>`;
@@ -339,8 +452,8 @@
           <div class="card-name">${item.name}</div>
           <div class="card-desc">${item.description}</div>
           <div class="card-footer">
-            <div class="card-price">
-              ${item.price_per_day} ${item.currency || '₽'} <span>/ сутки</span>
+            <div class="card-price" data-rub="${prices.rub}" data-vnd="${prices.vnd}" data-usd="${prices.usd}">
+              <span class="card-price-amount"></span> <span class="card-price-suffix">/ сутки</span>
             </div>
             <span class="badge ${avail ? 'badge-available' : 'badge-unavailable'}">
               ${avail ? 'Доступно' : 'Занято'}
@@ -396,6 +509,15 @@
       buildContactBar(company);
       buildNav(categories);
       buildSections(categories);
+
+      const curSel = document.getElementById('currency-select');
+      curSel.value = getStoredCurrency();
+      curSel.addEventListener('change', () => {
+        setStoredCurrency(curSel.value);
+        applyCurrencyToCards();
+      });
+      applyCurrencyToCards();
+
       activateNavOnScroll();
     } catch (e) {
       document.getElementById('main').innerHTML = `
