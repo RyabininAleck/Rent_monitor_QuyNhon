@@ -1,7 +1,13 @@
 {
   "company": {
-    "name": "Аренда мебели и техники",
-    "tagline": "Столы, стулья, мониторы, освещение — для любых мероприятий",
+    "name": {
+      "ru": "Аренда мебели и техники",
+      "en": "Furniture & equipment rental"
+    },
+    "tagline": {
+      "ru": "Столы, стулья, мониторы, освещение — для любых мероприятий",
+      "en": "Tables, chairs, monitors, lighting — for any event"
+    },
     "phone": "+84 347 144 616",
     "telegram": "@Ruabinin_Alexander",
     "email": ""
@@ -9,21 +15,27 @@
   "categories": [
     {
       "id": "monitors",
-      "name": "Мониторы",
+      "name": { "ru": "Мониторы", "en": "Monitors" },
       "icon": "🖥️",
       "items": [
         {
           "id": "monitor-1",
-          "name": "Монитор 27\" Full HD",
-          "description": "27 дюймов, 1920×1080, IPS-матрица, 75 Гц. Разъёмы: HDMI, DisplayPort, VGA.",
+          "name": { "ru": "Монитор 27\" Full HD", "en": "27\" Full HD monitor" },
+          "description": {
+            "ru": "27 дюймов, 1920×1080, IPS-матрица, 75 Гц. Разъёмы: HDMI, DisplayPort, VGA.",
+            "en": "27\", 1920×1080, IPS panel, 75 Hz. Ports: HDMI, DisplayPort, VGA."
+          },
           "price_per_day": { "rub": 400, "vnd": 110000, "usd": 4.4 },
           "image": "",
           "available": true
         },
         {
           "id": "monitor-2",
-          "name": "Монитор 24\" Full HD",
-          "description": "24 дюйма, 1920×1080, IPS-матрица, 60 Гц. Разъёмы: HDMI, VGA. Компактный и лёгкий.",
+          "name": { "ru": "Монитор 24\" Full HD", "en": "24\" Full HD monitor" },
+          "description": {
+            "ru": "24 дюйма, 1920×1080, IPS-матрица, 60 Гц. Разъёмы: HDMI, VGA. Компактный и лёгкий.",
+            "en": "24\", 1920×1080, IPS panel, 60 Hz. HDMI, VGA. Compact and light."
+          },
           "price_per_day": { "rub": 300, "vnd": 82500, "usd": 3.3 },
           "image": "",
           "available": true
@@ -32,21 +44,27 @@
     },
     {
       "id": "tables",
-      "name": "Столы",
+      "name": { "ru": "Столы", "en": "Tables" },
       "icon": "🪑",
       "items": [
         {
           "id": "table-1",
-          "name": "Стол компьютерный угловой",
-          "description": "Угловой стол 160×120 см, ДСП 25 мм, металлические ножки. Подходит для рабочего места.",
+          "name": { "ru": "Стол компьютерный угловой", "en": "L-shaped computer desk" },
+          "description": {
+            "ru": "Угловой стол 160×120 см, ДСП 25 мм, металлические ножки. Подходит для рабочего места.",
+            "en": "L-desk 160×120 cm, 25 mm chipboard, metal legs. Ideal for a workstation."
+          },
           "price_per_day": { "rub": 300, "vnd": 82500, "usd": 3.3 },
           "image": "",
           "available": true
         },
         {
           "id": "table-2",
-          "name": "Стол прямой 120 см",
-          "description": "Прямой рабочий стол 120×60 см, высота 75 см. Лёгкий, удобный для переноски.",
+          "name": { "ru": "Стол прямой 120 см", "en": "Straight desk 120 cm" },
+          "description": {
+            "ru": "Прямой рабочий стол 120×60 см, высота 75 см. Лёгкий, удобный для переноски.",
+            "en": "Straight desk 120×60 cm, height 75 cm. Light and easy to move."
+          },
           "price_per_day": { "rub": 200, "vnd": 55000, "usd": 2.2 },
           "image": "",
           "available": true
@@ -55,21 +73,27 @@
     },
     {
       "id": "chairs",
-      "name": "Компьютерные стулья",
+      "name": { "ru": "Компьютерные стулья", "en": "Office & gaming chairs" },
       "icon": "💺",
       "items": [
         {
           "id": "chair-1",
-          "name": "Кресло геймерское",
-          "description": "Эргономичное геймерское кресло с поясничной поддержкой, регулировкой высоты и подлокотников.",
+          "name": { "ru": "Кресло геймерское", "en": "Gaming chair" },
+          "description": {
+            "ru": "Эргономичное геймерское кресло с поясничной поддержкой, регулировкой высоты и подлокотников.",
+            "en": "Ergonomic gaming chair with lumbar support, height and armrest adjustment."
+          },
           "price_per_day": { "rub": 250, "vnd": 69000, "usd": 2.75 },
           "image": "",
           "available": true
         },
         {
           "id": "chair-2",
-          "name": "Офисное кресло",
-          "description": "Классическое офисное кресло с сетчатой спинкой. Регулируемая высота, подъёмный механизм.",
+          "name": { "ru": "Офисное кресло", "en": "Office chair" },
+          "description": {
+            "ru": "Классическое офисное кресло с сетчатой спинкой. Регулируемая высота, подъёмный механизм.",
+            "en": "Classic office chair with mesh back. Adjustable height, gas lift."
+          },
           "price_per_day": { "rub": 150, "vnd": 41000, "usd": 1.65 },
           "image": "",
           "available": true
@@ -78,29 +102,38 @@
     },
     {
       "id": "lighting",
-      "name": "Осветительные приборы",
+      "name": { "ru": "Осветительные приборы", "en": "Lighting" },
       "icon": "💡",
       "items": [
         {
           "id": "light-1",
-          "name": "Кольцевая лампа 45 см",
-          "description": "Кольцевая LED-лампа диаметром 45 см, 3 режима света (тёплый/нейтральный/холодный), со штативом до 2 м.",
+          "name": { "ru": "Кольцевая лампа 45 см", "en": "Ring light 45 cm" },
+          "description": {
+            "ru": "Кольцевая LED-лампа диаметром 45 см, 3 режима света (тёплый/нейтральный/холодный), со штативом до 2 м.",
+            "en": "45 cm ring LED light, 3 color modes (warm/neutral/cool), stand up to 2 m."
+          },
           "price_per_day": { "rub": 400, "vnd": 110000, "usd": 4.4 },
           "image": "",
           "available": true
         },
         {
           "id": "light-2",
-          "name": "Настольная LED-лампа",
-          "description": "Настольный LED-светильник, регулировка яркости и цвета температуры. Для рабочего стола.",
+          "name": { "ru": "Настольная LED-лампа", "en": "Desk LED lamp" },
+          "description": {
+            "ru": "Настольный LED-светильник, регулировка яркости и цвета температуры. Для рабочего стола.",
+            "en": "Desk LED lamp with brightness and color temperature control."
+          },
           "price_per_day": { "rub": 150, "vnd": 41000, "usd": 1.65 },
           "image": "",
           "available": true
         },
         {
           "id": "light-3",
-          "name": "Прожектор LED 50 Вт",
-          "description": "Направленный прожектор 50 Вт, 4000К. Подходит для освещения сцены или мероприятий на улице.",
+          "name": { "ru": "Прожектор LED 50 Вт", "en": "50 W LED floodlight" },
+          "description": {
+            "ru": "Направленный прожектор 50 Вт, 4000К. Подходит для освещения сцены или мероприятий на улице.",
+            "en": "50 W directional floodlight, 4000K. For stage or outdoor events."
+          },
           "price_per_day": { "rub": 600, "vnd": 165000, "usd": 6.6 },
           "image": "",
           "available": true
@@ -109,21 +142,27 @@
     },
     {
       "id": "audio",
-      "name": "Колонки",
+      "name": { "ru": "Колонки", "en": "Speakers" },
       "icon": "🔊",
       "items": [
         {
           "id": "speaker-1",
-          "name": "Колонка Bluetooth портативная",
-          "description": "Мощность 40 Вт, встроенный аккумулятор 10 ч, Bluetooth 5.0, AUX-вход. Подходит для небольших мероприятий.",
+          "name": { "ru": "Колонка Bluetooth портативная", "en": "Portable Bluetooth speaker" },
+          "description": {
+            "ru": "Мощность 40 Вт, встроенный аккумулятор 10 ч, Bluetooth 5.0, AUX-вход. Подходит для небольших мероприятий.",
+            "en": "40 W, built-in 10 h battery, Bluetooth 5.0, AUX. For small events."
+          },
           "price_per_day": { "rub": 500, "vnd": 137500, "usd": 5.5 },
           "image": "",
           "available": true
         },
         {
           "id": "speaker-2",
-          "name": "Акустическая система 2.1",
-          "description": "Сателлиты 2×15 Вт + сабвуфер 30 Вт. Подключение: USB, AUX. Для офисных мероприятий.",
+          "name": { "ru": "Акустическая система 2.1", "en": "2.1 speaker system" },
+          "description": {
+            "ru": "Сателлиты 2×15 Вт + сабвуфер 30 Вт. Подключение: USB, AUX. Для офисных мероприятий.",
+            "en": "2×15 W satellites + 30 W subwoofer. USB, AUX. For office events."
+          },
           "price_per_day": { "rub": 350, "vnd": 96000, "usd": 3.85 },
           "image": "",
           "available": false

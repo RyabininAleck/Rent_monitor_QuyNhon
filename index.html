@@ -107,6 +107,7 @@
       justify-content: center;
     }
 
+    .nav-lang select,
     .nav-currency select {
       background: var(--surface2);
       border: 1px solid var(--border);
@@ -119,6 +120,8 @@
       text-align: center;
     }
 
+    .nav-lang select:hover,
+    .nav-lang select:focus,
     .nav-currency select:hover,
     .nav-currency select:focus {
       border-color: var(--accent);
@@ -321,6 +324,12 @@
 <nav id="nav">
   <div class="nav-row">
     <div id="nav-cats"></div>
+    <div class="nav-lang">
+      <select id="lang-select" aria-label="Язык интерфейса">
+        <option value="ru">RU</option>
+        <option value="en">EN</option>
+      </select>
+    </div>
     <div class="nav-currency">
       <select id="currency-select" aria-label="Валюта отображения цен">
         <option value="rub">₽</option>
@@ -342,10 +351,113 @@
 <script>
   const CURRENCY_STORAGE_KEY = 'rent_monitor_currency';
   const CURRENCY_CODES = ['rub', 'vnd', 'usd'];
+  const LANG_STORAGE_KEY = 'rent_monitor_lang';
+  const LANG_CODES = ['ru', 'en'];
+
+  const UI_STRINGS = {
+    ru: {
+      loading: 'Загружаем каталог...',
+      siteLoading: 'Загрузка...',
+      perDay: '/ сутки',
+      available: 'Доступно',
+      unavailable: 'Занято',
+      itemsCount: n => `${n} поз.`,
+      currencyAria: 'Валюта отображения цен',
+      langAria: 'Язык интерфейса',
+      errorBody: 'Не удалось загрузить каталог.<br/>Проверьте, что файл <code>catalog.json</code> находится рядом с <code>index.html</code>.',
+      catalogFetchError: 'Не удалось загрузить catalog.json'
+    },
+    en: {
+      loading: 'Loading catalog...',
+      siteLoading: 'Loading...',
+      perDay: '/ day',
+      available: 'Available',
+      unavailable: 'Booked',
+      itemsCount: n => `${n} item${n === 1 ? '' : 's'}`,
+      currencyAria: 'Price display currency',
+      langAria: 'Interface language',
+      errorBody: 'Could not load the catalog.<br/>Make sure <code>catalog.json</code> is next to <code>index.html</code>.',
+      catalogFetchError: 'Failed to load catalog.json'
+    }
+  };
+
+  let catalogData = null;
+  let navScrollObserver = null;
+
+  function escapeHtml(s) {
+    return String(s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function getStoredLang() {
+    try {
+      const v = localStorage.getItem(LANG_STORAGE_KEY);
+      if (v && LANG_CODES.includes(v)) return v;
+    } catch (_) {}
+    return 'ru';
+  }
+
+  function setStoredLang(code) {
+    try {
+      localStorage.setItem(LANG_STORAGE_KEY, code);
+    } catch (_) {}
+  }
+
+  function getLang() {
+    const sel = document.getElementById('lang-select');
+    if (sel && LANG_CODES.includes(sel.value)) return sel.value;
+    return getStoredLang();
+  }
+
+  function ui() {
+    const lang = getLang();
+    return UI_STRINGS[lang] || UI_STRINGS.ru;
+  }
+
+  function applyNavAria() {
+    const u = ui();
+    const c = document.getElementById('currency-select');
+    const l = document.getElementById('lang-select');
+    if (c) c.setAttribute('aria-label', u.currencyAria);
+    if (l) l.setAttribute('aria-label', u.langAria);
+  }
+
+  function pickLocalized(val, lang) {
+    if (val == null) return '';
+    if (typeof val === 'string') return val;
+    if (typeof val === 'object' && !Array.isArray(val)) {
+      return val[lang] || val.ru || val.en || Object.values(val).find(Boolean) || '';
+    }
+    return String(val);
+  }
+
+  function localizeCompany(company, lang) {
+    return {
+      ...company,
+      name: pickLocalized(company.name, lang),
+      tagline: pickLocalized(company.tagline, lang)
+    };
+  }
+
+  function localizeCategories(categories, lang) {
+    return categories.map(cat => ({
+      ...cat,
+      name: pickLocalized(cat.name, lang),
+      items: cat.items.map(item => ({
+        ...item,
+        name: pickLocalized(item.name, lang),
+        description: pickLocalized(item.description, lang)
+      }))
+    }));
+  }
 
   async function loadCatalog() {
+    const lang = getStoredLang();
+    const errMsg = (UI_STRINGS[lang] || UI_STRINGS.ru).catalogFetchError;
     const res = await fetch('catalog.json');
-    if (!res.ok) throw new Error('Не удалось загрузить catalog.json');
+    if (!res.ok) throw new Error(errMsg);
     return res.json();
   }
 
@@ -363,15 +475,17 @@
     } catch (_) {}
   }
 
-  function formatPrice(code, value) {
+  function formatPrice(currencyCode, value, lang) {
     const n = Number(value);
-    if (code === 'rub') {
-      return new Intl.NumberFormat('ru-RU').format(n) + ' ₽';
+    const numLoc = lang === 'en' ? 'en-US' : 'ru-RU';
+    if (currencyCode === 'rub') {
+      return new Intl.NumberFormat(numLoc).format(n) + ' ₽';
     }
-    if (code === 'vnd') {
-      return new Intl.NumberFormat('vi-VN').format(Math.round(n)) + ' ₫';
+    if (currencyCode === 'vnd') {
+      const loc = lang === 'en' ? 'en-US' : 'vi-VN';
+      return new Intl.NumberFormat(loc).format(Math.round(n)) + ' ₫';
     }
-    if (code === 'usd') {
+    if (currencyCode === 'usd') {
       return new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'USD',
@@ -394,12 +508,13 @@
   function applyCurrencyToCards() {
     const sel = document.getElementById('currency-select');
     const code = sel ? sel.value : 'rub';
+    const lang = getLang();
     document.querySelectorAll('.card-price[data-rub]').forEach(el => {
       const raw = el.getAttribute('data-' + code);
       const num = raw != null ? Number(raw) : NaN;
       const amount = el.querySelector('.card-price-amount');
       if (amount && !Number.isNaN(num)) {
-        amount.textContent = formatPrice(code, num);
+        amount.textContent = formatPrice(code, num, lang);
       }
     });
   }
@@ -408,43 +523,44 @@
     const bar = document.getElementById('contact-bar');
     if (company.phone) {
       const tel = company.phone.replace(/\s/g, '');
-      bar.innerHTML += `<a class="contact-btn" href="tel:${tel}">📞 ${company.phone}</a>`;
+      bar.innerHTML += `<a class="contact-btn" href="tel:${tel}">📞 ${escapeHtml(company.phone)}</a>`;
     }
     if (company.telegram) {
       const tg = company.telegram.replace('@', '');
-      bar.innerHTML += `<a class="contact-btn" href="https://t.me/${tg}" target="_blank">✈️ ${company.telegram}</a>`;
+      bar.innerHTML += `<a class="contact-btn" href="https://t.me/${escapeHtml(tg)}" target="_blank">✈️ ${escapeHtml(company.telegram)}</a>`;
     }
     if (company.email) {
-      bar.innerHTML += `<a class="contact-btn" href="mailto:${company.email}">✉️ ${company.email}</a>`;
+      bar.innerHTML += `<a class="contact-btn" href="mailto:${escapeHtml(company.email)}">✉️ ${escapeHtml(company.email)}</a>`;
     }
   }
 
   function buildNav(categories) {
     const navCats = document.getElementById('nav-cats');
     navCats.innerHTML = categories.map(cat =>
-      `<a href="#cat-${cat.id}">${cat.icon} ${cat.name}</a>`
+      `<a href="#cat-${escapeHtml(cat.id)}">${cat.icon} ${escapeHtml(cat.name)}</a>`
     ).join('');
   }
 
-  function buildCard(item, categoryIcon) {
+  function buildCard(item, categoryIcon, u) {
     const avail = item.available;
     const prices = normalizeItemPrices(item);
+    const nameEsc = escapeHtml(item.name);
     const imageHtml = item.image
-      ? `<div class="card-image"><img src="${item.image}" alt="${item.name}" loading="lazy" /></div>`
+      ? `<div class="card-image"><img src="${escapeHtml(item.image)}" alt="${nameEsc}" loading="lazy" /></div>`
       : `<div class="card-image">${categoryIcon}</div>`;
 
     return `
       <div class="card${avail ? '' : ' unavailable'}">
         ${imageHtml}
         <div class="card-body">
-          <div class="card-name">${item.name}</div>
-          <div class="card-desc">${item.description}</div>
+          <div class="card-name">${nameEsc}</div>
+          <div class="card-desc">${escapeHtml(item.description)}</div>
           <div class="card-footer">
             <div class="card-price" data-rub="${prices.rub}" data-vnd="${prices.vnd}" data-usd="${prices.usd}">
-              <span class="card-price-amount"></span> <span class="card-price-suffix">/ сутки</span>
+              <span class="card-price-amount"></span> <span class="card-price-suffix">${escapeHtml(u.perDay)}</span>
             </div>
             <span class="badge ${avail ? 'badge-available' : 'badge-unavailable'}">
-              ${avail ? 'Доступно' : 'Занято'}
+              ${avail ? escapeHtml(u.available) : escapeHtml(u.unavailable)}
             </span>
           </div>
         </div>
@@ -452,26 +568,31 @@
     `;
   }
 
-  function buildSections(categories) {
+  function buildSections(categories, u) {
     const main = document.getElementById('main');
     main.innerHTML = categories.map(cat => `
-      <section class="section" id="cat-${cat.id}">
+      <section class="section" id="cat-${escapeHtml(cat.id)}">
         <div class="section-header">
           <span class="section-icon">${cat.icon}</span>
-          <h2 class="section-title">${cat.name}</h2>
-          <span class="section-count">${cat.items.length} поз.</span>
+          <h2 class="section-title">${escapeHtml(cat.name)}</h2>
+          <span class="section-count">${escapeHtml(u.itemsCount(cat.items.length))}</span>
         </div>
         <div class="grid">
-          ${cat.items.map(item => buildCard(item, cat.icon)).join('')}
+          ${cat.items.map(item => buildCard(item, cat.icon, u)).join('')}
         </div>
       </section>
     `).join('');
   }
 
   function activateNavOnScroll() {
+    if (navScrollObserver) {
+      navScrollObserver.disconnect();
+      navScrollObserver = null;
+    }
     const links = document.querySelectorAll('nav a');
     const sections = document.querySelectorAll('.section');
-    const observer = new IntersectionObserver(entries => {
+    if (!sections.length) return;
+    navScrollObserver = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const id = entry.target.id;
@@ -481,40 +602,78 @@
         }
       });
     }, { threshold: 0.3 });
-    sections.forEach(s => observer.observe(s));
+    sections.forEach(s => navScrollObserver.observe(s));
+  }
+
+  function renderCatalog(data) {
+    const lang = getLang();
+    document.documentElement.lang = lang;
+    const u = ui();
+    const co = localizeCompany(data.company, lang);
+    const cats = localizeCategories(data.categories, lang);
+
+    document.title = co.name;
+    document.getElementById('site-name').textContent = co.name;
+    document.getElementById('site-tagline').textContent = co.tagline || '';
+    document.getElementById('footer-name').textContent = co.name;
+
+    const bar = document.getElementById('contact-bar');
+    bar.innerHTML = '';
+    buildContactBar(data.company);
+
+    buildNav(cats);
+    buildSections(cats, u);
+    applyCurrencyToCards();
+    activateNavOnScroll();
+  }
+
+  function showError(e) {
+    const lang = getLang();
+    document.documentElement.lang = lang;
+    const u = UI_STRINGS[lang] || UI_STRINGS.ru;
+    document.getElementById('main').innerHTML = `
+      <div class="error-msg">
+        <p style="font-size:2rem;margin-bottom:12px">⚠️</p>
+        <p>${u.errorBody}</p>
+        <p style="margin-top:8px;font-size:0.8rem;color:#555">${escapeHtml(e.message)}</p>
+      </div>
+    `;
+  }
+
+  function bootstrapShell() {
+    const lang = getStoredLang();
+    document.documentElement.lang = lang;
+    const u = UI_STRINGS[lang] || UI_STRINGS.ru;
+    const langSel = document.getElementById('lang-select');
+    if (langSel) langSel.value = lang;
+    document.getElementById('site-name').textContent = u.siteLoading;
+    const loadEl = document.querySelector('#main .loading');
+    if (loadEl) loadEl.textContent = u.loading;
+    applyNavAria();
   }
 
   async function init() {
+    bootstrapShell();
+
+    document.getElementById('lang-select').addEventListener('change', () => {
+      setStoredLang(document.getElementById('lang-select').value);
+      applyNavAria();
+      if (catalogData) {
+        renderCatalog(catalogData);
+      }
+    });
+
     try {
-      const data = await loadCatalog();
-      const { company, categories } = data;
-
-      document.title = company.name;
-      document.getElementById('site-name').textContent = company.name;
-      document.getElementById('site-tagline').textContent = company.tagline || '';
-      document.getElementById('footer-name').textContent = company.name;
-
-      buildContactBar(company);
-      buildNav(categories);
-      buildSections(categories);
-
+      catalogData = await loadCatalog();
       const curSel = document.getElementById('currency-select');
       curSel.value = getStoredCurrency();
       curSel.addEventListener('change', () => {
         setStoredCurrency(curSel.value);
         applyCurrencyToCards();
       });
-      applyCurrencyToCards();
-
-      activateNavOnScroll();
+      renderCatalog(catalogData);
     } catch (e) {
-      document.getElementById('main').innerHTML = `
-        <div class="error-msg">
-          <p style="font-size:2rem;margin-bottom:12px">⚠️</p>
-          <p>Не удалось загрузить каталог.<br/>Проверьте, что файл <code>catalog.json</code> находится рядом с <code>index.html</code>.</p>
-          <p style="margin-top:8px;font-size:0.8rem;color:#555">${e.message}</p>
-        </div>
-      `;
+      showError(e);
     }
   }
 
