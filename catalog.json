@@ -19,24 +19,35 @@
       "icon": "🖥️",
       "items": [
         {
-          "id": "monitor-1",
-          "name": { "ru": "Монитор 27\" Full HD", "en": "27\" Full HD monitor" },
+          "id": "monitor-xiaomi-a24i",
+          "name": { "ru": "Монитор Xiaomi A24i", "en": "Xiaomi Monitor A24i" },
           "description": {
-            "ru": "27 дюймов, 1920×1080, IPS-матрица, 75 Гц. Разъёмы: HDMI, DisplayPort, VGA.",
-            "en": "27\", 1920×1080, IPS panel, 75 Hz. Ports: HDMI, DisplayPort, VGA."
+            "ru": "23,8\", IPS, 1920×1080, до 144 Гц, 99% sRGB. Сертификат TÜV Low Blue Light, узкие рамки, наклонная подставка, VESA.",
+            "en": "23.8\" IPS, 1920×1080, up to 144 Hz, 99% sRGB. TÜV Low Blue Light, slim bezels, tilt stand, VESA."
+          },
+          "price_per_day": { "rub": 300, "vnd": 82500, "usd": 3.3 },
+          "image": "",
+          "available": true
+        },
+        {
+          "id": "monitor-xiaomi-a27i",
+          "name": { "ru": "Монитор Xiaomi A27i", "en": "Xiaomi Monitor A27i" },
+          "description": {
+            "ru": "27\", IPS, 1920×1080, до 144 Гц, 99% sRGB, ΔE<1 с завода. TÜV Low Blue Light, подставка с наклоном, VESA.",
+            "en": "27\" IPS, 1920×1080, up to 144 Hz, 99% sRGB, factory ΔE<1. TÜV Low Blue Light, tilt stand, VESA."
           },
           "price_per_day": { "rub": 400, "vnd": 110000, "usd": 4.4 },
           "image": "",
           "available": true
         },
         {
-          "id": "monitor-2",
-          "name": { "ru": "Монитор 24\" Full HD", "en": "24\" Full HD monitor" },
+          "id": "monitor-xiaomi-g34i",
+          "name": { "ru": "Монитор Xiaomi G34i", "en": "Xiaomi Monitor G34i" },
           "description": {
-            "ru": "24 дюйма, 1920×1080, IPS-матрица, 60 Гц. Разъёмы: HDMI, VGA. Компактный и лёгкий.",
-            "en": "24\", 1920×1080, IPS panel, 60 Hz. HDMI, VGA. Compact and light."
+            "ru": "34\" изогнутый VA, 3440×1440 (21:9), высокая частота обновления, FreeSync. HDMI и DisplayPort — для игр и монтажа.",
+            "en": "34\" curved VA, 3440×1440 (21:9), high refresh, FreeSync. HDMI and DisplayPort — gaming and editing."
           },
-          "price_per_day": { "rub": 300, "vnd": 82500, "usd": 3.3 },
+          "price_per_day": { "rub": 550, "vnd": 151000, "usd": 6.05 },
           "image": "",
           "available": true
         }
