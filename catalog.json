@@ -79,6 +79,34 @@
           "price_per_day": { "rub": 200, "vnd": 55000, "usd": 2.2 },
           "image": "",
           "available": true
+        },
+        {
+          "id": "table-xpanse-electric-walnut",
+          "name": {
+            "ru": "Xpanse Southeast Asian Walnut Electric Office Table",
+            "en": "Xpanse Southeast Asian Walnut Electric Office Table"
+          },
+          "description": {
+            "ru": "Электрический стол с регулировкой высоты для офиса, учёбы и игр; отделка под орех/клён, на витрине размеры 120×60 / 140×60 / 160×60 см и комплектации Basic, Pro, с ящиком и наборами. Подробнее: https://xpansemy.com/products/xpanse-electric-office-gaming-computer-study-table-height-adjustable",
+            "en": "Electric height-adjustable desk for office, study, and gaming; walnut/maple-style tops; store sizes 120×60, 140×60, 160×60 cm with Basic, Pro, drawer, and bundle options. Details: https://xpansemy.com/products/xpanse-electric-office-gaming-computer-study-table-height-adjustable"
+          },
+          "price_per_day": { "rub": 400, "vnd": 110000, "usd": 4.4 },
+          "image": "https://xpansemy.com/cdn/shop/files/06ca7cd48f110b7ba44e525b09c1cbc8.jpg?v=1764128981",
+          "available": true
+        },
+        {
+          "id": "table-xpanse-xterity-carbon",
+          "name": {
+            "ru": "Xpanse Carbon Fibre Z-Type Gaming Table",
+            "en": "Xpanse Carbon Fibre Z-Type Gaming Table"
+          },
+          "description": {
+            "ru": "Игровой стол с Z-образной опорой, split-top и удобной прокладкой кабелей; линейка X-Twin B (в т.ч. Pro), длины 1.2 / 1.4 / 1.6 м. Подробнее: https://xpansemy.com/products/x-terity",
+            "en": "Z-frame gaming desk with split top and cable management; X-Twin B series (incl. Pro), lengths 1.2 / 1.4 / 1.6 m. Details: https://xpansemy.com/products/x-terity"
+          },
+          "price_per_day": { "rub": 280, "vnd": 77000, "usd": 3.08 },
+          "image": "https://xpansemy.com/cdn/shop/files/7_1349de0f-dbb0-4bab-959f-135082b839bf.png?v=1758886828",
+          "available": true
         }
       ]
     },
