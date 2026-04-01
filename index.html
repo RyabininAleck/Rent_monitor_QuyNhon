@@ -208,8 +208,8 @@
 
     .card-image {
       width: 100%;
-      height: 180px;
-      object-fit: cover;
+      min-height: 120px;
+      max-height: min(52vh, 420px);
       background: var(--surface2);
       display: flex;
       align-items: center;
@@ -219,9 +219,13 @@
     }
 
     .card-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      max-width: 100%;
+      max-height: min(52vh, 420px);
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto;
     }
 
     .card-body {
@@ -357,6 +361,7 @@
     ru: {
       loading: 'Загружаем каталог...',
       siteLoading: 'Загрузка...',
+      priceFrom: 'от ',
       perDay: '/ сутки',
       available: 'Доступно',
       unavailable: 'Занято',
@@ -369,6 +374,7 @@
     en: {
       loading: 'Loading catalog...',
       siteLoading: 'Loading...',
+      priceFrom: 'from ',
       perDay: '/ day',
       available: 'Available',
       unavailable: 'Booked',
@@ -508,12 +514,13 @@
     const sel = document.getElementById('currency-select');
     const code = sel ? sel.value : 'rub';
     const lang = getLang();
+    const prefix = ui().priceFrom;
     document.querySelectorAll('.card-price[data-rub]').forEach(el => {
       const raw = el.getAttribute('data-' + code);
       const num = raw != null ? Number(raw) : NaN;
       const amount = el.querySelector('.card-price-amount');
       if (amount && !Number.isNaN(num)) {
-        amount.textContent = formatPrice(code, num, lang);
+        amount.textContent = prefix + formatPrice(code, num, lang);
       }
     });
   }
