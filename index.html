@@ -307,7 +307,8 @@
   function buildContactBar(company) {
     const bar = document.getElementById('contact-bar');
     if (company.phone) {
-      bar.innerHTML += `<a class="contact-btn" href="tel:${company.phone}">📞 ${company.phone}</a>`;
+      const tel = company.phone.replace(/\s/g, '');
+      bar.innerHTML += `<a class="contact-btn" href="tel:${tel}">📞 ${company.phone}</a>`;
     }
     if (company.telegram) {
       const tg = company.telegram.replace('@', '');
