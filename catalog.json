@@ -59,28 +59,6 @@
       "icon": "🪑",
       "items": [
         {
-          "id": "table-1",
-          "name": { "ru": "Стол компьютерный угловой", "en": "L-shaped computer desk" },
-          "description": {
-            "ru": "Угловой стол 160×120 см, ДСП 25 мм, металлические ножки. Подходит для рабочего места.",
-            "en": "L-desk 160×120 cm, 25 mm chipboard, metal legs. Ideal for a workstation."
-          },
-          "price_per_day": { "rub": 300, "vnd": 82500, "usd": 3.3 },
-          "image": "",
-          "available": true
-        },
-        {
-          "id": "table-2",
-          "name": { "ru": "Стол прямой 120 см", "en": "Straight desk 120 cm" },
-          "description": {
-            "ru": "Прямой рабочий стол 120×60 см, высота 75 см. Лёгкий, удобный для переноски.",
-            "en": "Straight desk 120×60 cm, height 75 cm. Light and easy to move."
-          },
-          "price_per_day": { "rub": 200, "vnd": 55000, "usd": 2.2 },
-          "image": "",
-          "available": true
-        },
-        {
           "id": "table-xpanse-electric-walnut",
           "name": {
             "ru": "Xpanse Southeast Asian Walnut Electric Office Table",
@@ -146,46 +124,6 @@
           },
           "price_per_day": { "rub": 300, "vnd": 82500, "usd": 3.3 },
           "image": "https://xpansemy.com/cdn/shop/files/10_19e7bb03-ae39-4d84-8d1b-de5d120c7188.jpg?v=1762503964",
-          "available": true
-        }
-      ]
-    },
-    {
-      "id": "lighting",
-      "name": { "ru": "Осветительные приборы", "en": "Lighting" },
-      "icon": "💡",
-      "items": [
-        {
-          "id": "light-1",
-          "name": { "ru": "Кольцевая лампа 45 см", "en": "Ring light 45 cm" },
-          "description": {
-            "ru": "Кольцевая LED-лампа диаметром 45 см, 3 режима света (тёплый/нейтральный/холодный), со штативом до 2 м.",
-            "en": "45 cm ring LED light, 3 color modes (warm/neutral/cool), stand up to 2 m."
-          },
-          "price_per_day": { "rub": 400, "vnd": 110000, "usd": 4.4 },
-          "image": "",
-          "available": true
-        },
-        {
-          "id": "light-2",
-          "name": { "ru": "Настольная LED-лампа", "en": "Desk LED lamp" },
-          "description": {
-            "ru": "Настольный LED-светильник, регулировка яркости и цвета температуры. Для рабочего стола.",
-            "en": "Desk LED lamp with brightness and color temperature control."
-          },
-          "price_per_day": { "rub": 150, "vnd": 41000, "usd": 1.65 },
-          "image": "",
-          "available": true
-        },
-        {
-          "id": "light-3",
-          "name": { "ru": "Прожектор LED 50 Вт", "en": "50 W LED floodlight" },
-          "description": {
-            "ru": "Направленный прожектор 50 Вт, 4000К. Подходит для освещения сцены или мероприятий на улице.",
-            "en": "50 W directional floodlight, 4000K. For stage or outdoor events."
-          },
-          "price_per_day": { "rub": 600, "vnd": 165000, "usd": 6.6 },
-          "image": "",
           "available": true
         }
       ]
